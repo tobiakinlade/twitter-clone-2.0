@@ -1,10 +1,38 @@
 import NewTweet from 'components/NewTweet';
+import Tweets from 'components/Tweets';
+import { getTweets } from 'lib/data';
+import prisma from 'lib/prisma';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 
-export default function Home() {
+export default function Home({ tweets }) {
   const { data: session, status } = useSession();
-  if (status === 'loading') {
-    return <p>...</p>;
+  const loading = status === 'loading';
+  const router = useRouter();
+
+  if (loading) {
+    return null;
   }
-  return <div>{session ? <NewTweet /> : <p>You are not logged in 🙂</p>}</div>;
+
+  if (!session) {
+    router.push('/');
+  }
+
+  return (
+    <>
+      <NewTweet />
+      <Tweets tweets={tweets} />
+    </>
+  );
+}
+
+export async function getServerSideProps() {
+  let tweets = await getTweets(prisma);
+  tweets = JSON.parse(JSON.stringify(tweets));
+
+  return {
+    props: {
+      tweets,
+    },
+  };
 }
