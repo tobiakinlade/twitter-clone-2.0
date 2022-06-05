@@ -29,14 +29,14 @@ function NewReply({ tweet }) {
     <form onSubmit={handleSubmit}>
       <textarea
         className='border p-4 w-full text-lg font-medium bg-transparent outline-none color-primary'
-        rows={1}
+        rows={2}
         cols={50}
         placeholder='Tweet your reply'
         onChange={(e) => setReply(e.target.value)}
       />
       <div className='flex'>
         <div className='flex-1 mb-5'>
-          <button className='border float-right ml-2 px-8 mr-8 font-bold rounded-full color-accent-contrast bg-color-accent hover:bg-color-accent-hover'>
+          <button className='border float-right ml-2 px-8 py-2 mr-8 font-bold rounded-full color-accent-contrast bg-color-accent hover:bg-color-accent-hover'>
             Reply
           </button>
         </div>

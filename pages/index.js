@@ -3,10 +3,15 @@ import { getTweets } from 'lib/data';
 import prisma from 'lib/prisma';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import { useState, useEffect } from 'react';
 
 export default function Welcome({ tweets }) {
+  const [mounted, setMounted] = useState(false);
   const { data: session, status } = useSession();
   const router = useRouter();
+  if (!mounted) return;
+
+  useEffect(() => setMounted(true), []);
 
   if (status === 'loading') {
     return null;
@@ -15,7 +20,7 @@ export default function Welcome({ tweets }) {
     router.push('/home');
   }
   return (
-    <div className='mt-10'>
+    <div className='mt-10 dark'>
       <Tweets tweets={tweets} />
       <p className='text-center p-4 border m-4'>
         <h2 className='mb-10'>Join the conversation!</h2>
