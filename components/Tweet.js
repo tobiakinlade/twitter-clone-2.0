@@ -1,7 +1,7 @@
 import timeago from 'lib/timeago';
 import Image from 'next/image';
 import Link from 'next/link';
-function Tweet({ tweet }) {
+function Tweet({ tweet, nolink }) {
   return (
     <div className='mb-4'>
       <div className='flex flex-shrink-0 p-4 pb-0'>
@@ -30,11 +30,15 @@ function Tweet({ tweet }) {
                 </Link>
 
                 <span className='pl-1 text-sm font-light leading-5 color-dimmed'>
-                  <Link href={`/${tweet.author.name}/status/${tweet.id}`}>
-                    <a className='hover:underline'>
-                      {timeago.format(new Date(tweet.createdAt))}
-                    </a>
-                  </Link>
+                  {nolink ? (
+                    <span>{timeago.format(new Date(tweet.createdAt))}</span>
+                  ) : (
+                    <Link href={`/${tweet.author.name}/status/${tweet.id}`}>
+                      <a className='hover:underline'>
+                        {timeago.format(new Date(tweet.createdAt))}
+                      </a>
+                    </Link>
+                  )}
                 </span>
               </p>
             </div>
