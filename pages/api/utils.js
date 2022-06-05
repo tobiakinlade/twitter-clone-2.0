@@ -10,8 +10,10 @@ export default async function handler(req, res) {
     await prisma.tweet.deleteMany({});
     await prisma.user.deleteMany({
       where: {
-        email: {
-          in: [session.user.email],
+        NOT: {
+          email: {
+            in: [session.user.email],
+          },
         },
       },
     });
