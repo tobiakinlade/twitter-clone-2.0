@@ -30,9 +30,11 @@ function Tweet({ tweet }) {
                 </Link>
 
                 <span className='pl-1 text-sm font-light leading-5 color-dimmed'>
-                  <a href='#' className='hover:underline'>
-                    {timeago.format(new Date(tweet.createdAt))}
-                  </a>
+                  <Link href={`/${tweet.author.name}/status/${tweet.id}`}>
+                    <a className='hover:underline'>
+                      {timeago.format(new Date(tweet.createdAt))}
+                    </a>
+                  </Link>
                 </span>
               </p>
             </div>
