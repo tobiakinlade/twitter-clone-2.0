@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-function NewTweet() {
+function NewTweet({ tweets, setTweets }) {
   const { data: session } = useSession('');
   const [content, setContent] = useState();
   const router = useRouter();
@@ -10,7 +10,7 @@ function NewTweet() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await fetch('/api/tweet', {
+    const res = await fetch('/api/tweet', {
       body: JSON.stringify({
         content,
       }),
@@ -20,6 +20,9 @@ function NewTweet() {
       method: 'POST',
     });
 
+    const tweet = await res.json();
+
+    setTweets([tweet, ...tweets]);
     router.reload(window.location.pathname);
   };
 
