@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     domains: ['cloudflare-ipfs.com', 'localhost', 'lh3.googleusercontent.com'],
   },
-};
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig

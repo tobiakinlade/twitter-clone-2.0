@@ -6,7 +6,8 @@ import prisma from 'lib/prisma';
 import { useSession } from 'next-auth/react';
 import { useTheme } from 'next-themes';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
 export default function Home({ initialTweets }) {
   const { theme, setTheme } = useTheme();
   const { data: session, status } = useSession();

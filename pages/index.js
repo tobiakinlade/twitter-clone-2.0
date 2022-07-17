@@ -6,12 +6,10 @@ import { useRouter } from 'next/router';
 import { useState, useEffect } from 'react';
 
 export default function Welcome({ tweets }) {
-  const [mounted, setMounted] = useState(false);
+  
   const { data: session, status } = useSession();
   const router = useRouter();
-  if (!mounted) return;
 
-  useEffect(() => setMounted(true), []);
 
   if (status === 'loading') {
     return null;

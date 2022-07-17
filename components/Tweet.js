@@ -50,6 +50,7 @@ function Tweet({ tweet, nolink }) {
         <p className='flex-shrink pl-1 pr-2 text-base font-normal color-primary width-auto'>
           {tweet.content}
         </p>
+        <div>reply count</div>
       </div>
     </div>
   );
